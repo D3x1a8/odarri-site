@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Odarri: automatic mileage log for iPhone and Apple Watch</title>
+<meta name="description" content="Odarri logs every drive by itself on iPhone and Apple Watch. Unlimited drives and every PDF report free; Pro from $9.99 a year. No account, Data Not Collected.">
+<link rel="canonical" href="https://odarri.com/">
+<meta name="theme-color" content="#121110">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Odarri">
+<meta property="og:url" content="https://odarri.com/">
+<meta property="og:title" content="Odarri: every drive, logged by itself">
+<meta property="og:description" content="Automatic mileage log for iPhone and Apple Watch. Unlimited drives free. Pro from $9.99 a year. No account.">
+<meta property="og:image" content="https://odarri.com/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","@id":"https://odarri.com/#org","name":"Odarri","url":"https://odarri.com/","logo":"https://odarri.com/apple-touch-icon.png","email":"support@odarri.com","founder":{"@type":"Person","name":"Pritesh Singh"}},
+{"@type":"WebSite","@id":"https://odarri.com/#site","url":"https://odarri.com/","name":"Odarri","publisher":{"@id":"https://odarri.com/#org"}},
+{"@type":"MobileApplication","name":"Odarri: Mileage Tracker","operatingSystem":"iOS 17, watchOS 10","applicationCategory":"BusinessApplication","publisher":{"@id":"https://odarri.com/#org"},
+ "description":"Automatic mileage log for iPhone and Apple Watch. Unlimited drives free, every PDF report free, no account.",
+ "offers":[{"@type":"Offer","name":"Free","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Odarri Pro Yearly","price":"14.99","priceCurrency":"USD"},{"@type":"Offer","name":"Odarri Pro Lifetime","price":"29.99","priceCurrency":"USD"}]}
+]}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+<div class="wrap">
+<a class="brand" href="/"><img src="/img/icon-64.png" alt="" width="36" height="36">Odarri</a>
+<nav aria-label="Main">
+<a href="#day">How it works</a>
+<a href="#health">Tracking Health</a>
+<a href="#pricing">Pricing</a>
+<a href="/support">Support</a>
+</nav>
+</div>
+</header>
+
+<main id="main">
+<section class="hero dark" id="top" aria-labelledby="h1">
+<svg class="hero-road" aria-hidden="true" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice">
+<path d="M-60 700 C 300 640, 420 380, 760 360 S 1260 140, 1520 60" fill="none" stroke="#1E1C19" stroke-width="150" stroke-linecap="round"/>
+<path class="road" d="M-60 700 C 300 640, 420 380, 760 360 S 1260 140, 1520 60" fill="none" stroke="#F2C230" stroke-opacity=".35" stroke-width="5" stroke-dasharray="26 22"/>
+</svg>
+<div class="wrap">
+<div class="hero-copy">
+<p class="eyebrow"><span class="dot pulse"></span><span id="eyebrow">Mileage log for iPhone and Apple Watch</span></p>
+<h1 id="h1"><span class="w" style="animation-delay:.05s">Every</span> <span class="w" style="animation-delay:.15s">drive,</span><br><span class="w" style="animation-delay:.3s">logged</span> <span class="w" style="animation-delay:.4s">by</span> <span class="w hl" style="animation-delay:.5s">itself.</span></h1>
+<p class="lead w" style="animation-delay:.7s">Odarri notices when you drive and keeps the log for you, on iPhone and Apple Watch. Unlimited drives, free. That won't change.</p>
+<div class="cta-row w" style="animation-delay:.85s">
+<span class="btn btn-line"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>On the App Store 5 January 2027</span>
+<a class="text" href="#pricing">See what's free</a>
+</div>
+</div>
+
+<div class="hero-art">
+<div class="ticket w" style="animation-delay:.4s" id="ticket">
+<div class="t-top">
+<span class="t-status"><span class="rec blink" id="rec" hidden></span><span id="status">Logged</span></span>
+<span class="mono" id="clock">8:12 – 8:41</span>
+</div>
+<svg class="t-map" viewBox="0 0 372 170" role="img" aria-label="Map of a drive from home to Harbor Dental">
+<path d="M40 150 C 40 70, 330 110, 330 22" fill="none" stroke="#2D2A25" stroke-width="30" stroke-linecap="round"/>
+<path d="M40 150 C 40 70, 330 110, 330 22" fill="none" stroke="#F4F1EA" stroke-opacity=".18" stroke-width="2" stroke-dasharray="8 10"/>
+<path id="trail" d="M40 150 C 40 70, 330 110, 330 22" fill="none" stroke="#F2C230" stroke-width="5" stroke-linecap="round" pathLength="100" stroke-dasharray="100 100"/>
+<circle cx="40" cy="150" r="9" fill="#121110" stroke="#F4F1EA" stroke-width="4"/>
+<circle id="end" cx="330" cy="22" r="8" fill="#F4F1EA"/>
+<circle id="halo" cx="330" cy="22" r="13" fill="#F2C230" opacity=".25"/>
+<circle id="car" cx="330" cy="22" r="7" fill="#F2C230" stroke="#121110" stroke-width="3"/>
+</svg>
+<div class="t-route"><b id="route">Home → Harbor Dental, 14 Oak St</b><span id="sub">Reason: quarterly equipment check</span></div>
+<div class="t-odo">
+<div class="drums" role="img" aria-label="12.4 miles" id="drums">
+<span class="drum"><span style="transform:translateY(0px)">0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>0</span></span>
+<span class="drum"><span style="transform:translateY(-44px)">0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>0</span></span>
+<span class="drum"><span style="transform:translateY(-88px)">0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>0</span></span>
+<span class="drum lit"><span style="transform:translateY(-176px)">0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>0</span></span>
+</div>
+<span>miles</span>
+</div>
+<div class="t-foot" aria-live="polite">
+<div class="t-pocket" id="pocket" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8F897E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>Phone in your pocket. Nothing to tap.</div>
+<div class="t-sort pop" id="sort" hidden><button type="button" class="b-biz pulse" data-pick="business">Business</button><button type="button" class="b-per" data-pick="personal">Personal</button></div>
+<div class="t-done" id="done"><span class="stamp slam" id="stamp">Business<small id="stampNote">12.4 mi · $9.42 at 76¢</small></span><button type="button" class="again" id="again">Drive again</button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+<div class="ticker-track">
+<span>Unlimited drives, free</span><span>✦</span><span>No account</span><span>✦</span><span>Data Not Collected</span><span>✦</span><span>Every PDF free</span><span>✦</span><span>Pro from $9.99 a year</span><span>✦</span><span>Apple Watch included</span><span>✦</span>
+<span>Unlimited drives, free</span><span>✦</span><span>No account</span><span>✦</span><span>Data Not Collected</span><span>✦</span><span>Every PDF free</span><span>✦</span><span>Pro from $9.99 a year</span><span>✦</span><span>Apple Watch included</span><span>✦</span>
+</div>
+</div>
+
+<section class="scene" id="day" aria-labelledby="h-day">
+<div class="scene-panel">
+<div class="scene-head">
+<div class="stack">
+<p class="eyebrow">How it works · scroll through a Tuesday</p>
+<h2 class="h2" id="h-day">You drive. The log fills itself in.</h2>
+</div>
+<div class="stats" aria-live="off">
+<div class="stat"><span>Time</span><b id="dayClock">7:00 pm</b></div>
+<div class="stat"><span>Business miles</span><b class="gold" id="bizMiles">22.0</b></div>
+<div class="stat"><span>Worth at 76¢</span><b id="bizValue">$16.72</b></div>
+</div>
+</div>
+<div class="timeline" aria-hidden="true">
+<span class="seg" style="left:10%;width:4%;background:#F2C230"></span>
+<span class="seg" style="left:33.58%;width:5%;background:#F2C230"></span>
+<span class="seg" style="left:52.08%;width:1.67%;background:#4E6A86"></span>
+<span class="seg" style="left:88.92%;width:5.83%;background:#8F897E"></span>
+<span class="marker" id="marker" style="left:100%"></span>
+</div>
+<div class="hours" aria-hidden="true"><span>7 am</span><span>10 am</span><span>1 pm</span><span>4 pm</span><span>7 pm</span></div>
+<ol class="drives">
+<li class="drive"><div class="drive-meta"><span>8:12 – 8:41</span><span>12.4 mi</span></div><b>Home → Harbor Dental</b><span class="tag biz">Business</span><p>Sorted by your client rule. Reason asked once: equipment check.</p></li>
+<li class="drive"><div class="drive-meta"><span>11:02 – 11:38</span><span>9.6 mi</span></div><b>Harbor Dental → Westlake</b><span class="tag biz">Business</span><p>A six-minute coffee stop on the way. Still one drive.</p></li>
+<li class="drive"><div class="drive-meta"><span>1:15 – 1:27</span><span>4.2 mi</span></div><b>Westlake → Costco</b><span class="tag per">Personal</span><p>Swiped Personal from the widget. Kept out of reports.</p></li>
+<li class="drive"><div class="drive-meta"><span>5:40 – 6:22</span><span>22.4 mi</span></div><b>Westlake → Home</b><span class="tag com">Commute</span><p>Your Home and Work rule sorted it. Nothing to tap.</p></li>
+</ol>
+</div>
+</section>
+
+<section class="sec" id="health" style="background:var(--paper-2)" aria-labelledby="h-health">
+<div class="wrap split">
+<div class="stack rv">
+<p class="eyebrow">Tracking Health · try it</p>
+<h2 class="h2" id="h-health">If a drive could be missed, you'll see why.</h2>
+<p class="lead">Other trackers fail quietly. Odarri watches every iPhone setting that can cost you a drive. Flip these the way your phone might be set.</p>
+</div>
+<div class="health-card rv">
+<div class="verdict-row" id="hVerdict" aria-live="polite">
+<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="hIcon" d="M12 7v6M12 17h.01"/></svg>
+<div><b id="hTitle">Drives may be missed until 2 settings are fixed</b><span id="hNote">Each one has a button in the app that takes you straight to it.</span></div>
+</div>
+<div class="check" data-key="loc"><span class="cdot"></span><div class="check-text"><b>Location: Always</b><span data-bad="Set to While Using. Drives log only while Odarri is open." data-good="Odarri can catch drives with the app closed.">Set to While Using. Drives log only while Odarri is open.</span></div><button type="button" class="switch" role="switch" aria-checked="false" aria-label="Location: Always"><i></i></button></div>
+<div class="check ok" data-key="motion"><span class="cdot"></span><div class="check-text"><b>Motion &amp; Fitness</b><span data-bad="Off. Drives can start late and short stops can split a drive." data-good="Tells driving from walking, so drives start on time.">Tells driving from walking, so drives start on time.</span></div><button type="button" class="switch" role="switch" aria-checked="true" aria-label="Motion and Fitness"><i></i></button></div>
+<div class="check ok" data-key="bar"><span class="cdot"></span><div class="check-text"><b>Background App Refresh</b><span data-bad="Off. iOS wakes Odarri less often." data-good="iOS can wake Odarri when you start moving.">iOS can wake Odarri when you start moving.</span></div><button type="button" class="switch" role="switch" aria-checked="true" aria-label="Background App Refresh"><i></i></button></div>
+<div class="check" data-key="lpm" data-invert="1"><span class="cdot"></span><div class="check-text"><b>Low Power Mode</b><span data-bad="On. iOS holds back background work." data-good="Off. Nothing held back.">On. iOS holds back background work.</span></div><button type="button" class="switch invert" role="switch" aria-checked="true" aria-label="Low Power Mode"><i></i></button></div>
+</div>
+</div>
+</section>
+
+<section class="sec" aria-labelledby="h-report">
+<div class="wrap split">
+<div class="report-col rv">
+<div class="pdf">
+<div class="pdf-head"><img src="/img/icon-64.png" alt="" width="26" height="26">Mileage log · Tax year 2026</div>
+<div class="pdf-sub">Log begins 2 Oct 2026 · 1 vehicle</div>
+<hr>
+<div class="pdf-row"><div><span>Tue 13 Oct · Home → Harbor Dental</span><span class="mi" id="tMiles">12.4 mi</span></div><span class="why">Reason: quarterly equipment check</span></div>
+<div class="pdf-row"><div><span>Tue 13 Oct · Harbor Dental → Westlake</span><span class="mi">9.6 mi</span></div><span class="why">Reason: install visit</span></div>
+<hr>
+<div class="seal" id="seal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path id="sealIcon" d="M9 12l2 2 4-4"/></svg><span id="sealText" aria-live="polite">Unchanged since export. Certified on the phone that made it.</span></div>
+</div>
+<button type="button" class="btn btn-paper" id="tamper">Change 12.4 to 21.4</button>
+</div>
+<div class="stack rv">
+<p class="eyebrow">Reports · try changing one</p>
+<h2 class="h2">A log that shows when it's been touched.</h2>
+<ul class="ticks">
+<li>A reason for every business drive, asked the moment you sort it.</li>
+<li>Start and end addresses with coordinates, and the day the log began.</li>
+<li>Edits printed beside the original values, never over them.</li>
+<li>Every PDF certified on your phone. Anyone can check it at <a href="/verify">odarri.com/verify</a>.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="sec dark" aria-labelledby="h-dev">
+<div class="wrap stack" style="gap:44px">
+<h2 class="h2 rv" id="h-dev" style="max-width:760px">On your wrist, your Lock Screen, your Home Screen.</h2>
+<div class="devices">
+<div class="device lift rv"><div class="stage"><div class="watch">Today<b id="watchMiles">22.0</b>business mi</div></div><h3>Apple Watch</h3><p>Today's miles on a complication. Sort a drive from your wrist.</p></div>
+<div class="device lift rv"><div class="stage"><div class="la"><img src="/img/icon-64.png" alt="" width="34" height="34"><div><span id="laStatus">Driving · Odarri</span><b><span id="laMiles">8.6</span> mi · <span id="laTime">20 min</span></b></div><span class="rec blink"></span></div></div><h3>Live Activity</h3><p>The drive in progress on your Lock Screen and in the Dynamic Island.</p></div>
+<div class="device lift rv"><div class="stage"><div class="widget"><small>3 TO SORT</small><b>48.6</b><span>miles this week</span></div></div><h3>Widgets</h3><p>Unsorted drives and this week's miles on your Home Screen.</p></div>
+<div class="device lift rv"><div class="stage"><svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#F2C230" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a5 5 0 0 1-.5-9.98A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"/><path d="M9.5 13.5l2 2 3.5-4"/></svg></div><h3>Your own iCloud</h3><p>Synced through your private iCloud. Bring your old log in from a CSV.</p></div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="pricing" aria-labelledby="h-price">
+<div class="wrap stack" style="gap:44px">
+<div class="stack rv" style="gap:12px;max-width:720px">
+<p class="eyebrow">Pricing</p>
+<h2 class="h2" id="h-price">The whole log is free. Pro is up to 9× cheaper than the others.</h2>
+</div>
+<div class="plans">
+<div class="plan free lift rv">
+<div class="stack" style="gap:6px"><h3>Free</h3><div class="price">$0</div><div class="note">For as long as you drive.</div></div>
+<ul><li>Unlimited automatic and manual drives</li><li>Rules for Home, Work and regular places</li><li>Every PDF report, any period</li><li>Apple Watch, widgets, Live Activity</li><li>iCloud sync and Tracking Health</li></ul>
+</div>
+<div class="plan pro lift rv">
+<div class="stack" style="gap:6px"><h3>Odarri Pro</h3><div class="price">$9.99<small> your first year</small></div><div class="then">Then $14.99 a year. Or <strong>$29.99 once</strong>, for good.</div><div class="note">No monthly plan. Cancel any time in iOS Settings.</div></div>
+<ul><li>CSV of any period</li><li>More than one vehicle</li><li>Client rules and custom purposes</li><li class="soon">Receipts and regional templates, coming in 1.1</li></ul>
+</div>
+</div>
+<div class="compare rv">
+<div class="compare-head">
+<div><h3>What a mileage log costs over <span id="yrs">3 years</span></h3><p>Drag to see the gap grow. Their free tiers stop logging after a few drives a month; Odarri's doesn't stop.</p></div>
+<label class="slider"><span>Years: <span id="yrsN">3</span></span><input type="range" id="years" min="1" max="6" step="1" value="3"></label>
+</div>
+<ul class="rows">
+<li class="row yr" data-y="9.99" data-r="14.99"><div class="row-name"><b>Odarri Pro, yearly</b><span>Unlimited free drives</span></div><div class="track"><i style="width:4.8%"></i></div><output>$40</output></li>
+<li class="row lt" data-once="29.99"><div class="row-name"><b>Odarri Pro, lifetime</b><span>Pay once</span></div><div class="track"><i style="width:3.6%"></i></div><output>$30</output></li>
+<li class="row them" data-y="89.99" data-r="89.99"><div class="row-name"><b>Everlance Starter</b><span>Free: 30 auto trips a month</span></div><div class="track"><i style="width:32.1%"></i></div><output>$270</output></li>
+<li class="row them" data-y="132" data-r="132"><div class="row-name"><b>Driversnote Pro</b><span>Free: 15 trips a month</span></div><div class="track"><i style="width:47.1%"></i></div><output>$396</output></li>
+<li class="row them" data-y="139.92" data-r="139.92" id="mileiq"><div class="row-name"><b>MileIQ Unlimited</b><span>Free: 40 drives a month</span></div><div class="track"><i style="width:50%"></i></div><output>$420</output></li>
+</ul>
+<div class="kept"><b id="kept">$380</b><span>kept, against MileIQ, over <span id="yrs2">3 years</span></span></div>
+<p class="fine">Others: each company's US price for its cheapest plan with unlimited automatic tracking, paid yearly, from its own pricing page on 9 November 2026 (Driversnote lists $11 a month). Free-tier limits as those pages state them. Odarri yearly counts $9.99 for the first year, then $14.99.</p>
+</div>
+<p class="fine rv" style="font-size:15px;color:var(--ink-2)">Prices in US dollars; the App Store shows your local price. Rates built in for the US, UK, Canada, Australia and New Zealand. Anywhere else, set your own.</p>
+</div>
+</section>
+
+<section class="sec dark" aria-labelledby="h-priv" style="overflow:hidden">
+<div class="wrap stack" style="gap:24px;align-items:flex-start;padding-top:16px;padding-bottom:8px">
+<p class="eyebrow rv">App Store privacy label</p>
+<h2 class="big rv" id="h-priv">Data Not<br>Collected.</h2>
+<p class="lead rv" style="font-size:19px;max-width:54ch">No account, no analytics, no ad or crash SDKs, no server of ours. Your drives live on your iPhone and in your own iCloud.</p>
+<a class="btn btn-ghost rv" href="/privacy">Read the privacy policy</a>
+</div>
+</section>
+</main>
+
+<footer class="foot">
+<div class="wrap">
+<div><a class="brand" href="/"><img src="/img/icon-64.png" alt="" width="24" height="24">Odarri</a><p>© 2026 Pritesh Singh. Odarri is a mileage log, not tax advice.</p></div>
+<nav aria-label="Footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/support">Support</a><a href="/verify">Check a report</a><a href="mailto:support@odarri.com">support@odarri.com</a></nav>
+</div>
+</footer>
+<script src="/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# Odarri
+
+> Odarri is an automatic mileage log for iPhone and Apple Watch, by independent developer Pritesh Singh. Status: in TestFlight beta; App Store release planned for 5 January 2027.
+
+## Facts
+- Logs drives automatically in the background (location Always + Motion & Fitness); fully usable in manual mode without those permissions.
+- Free, with no limit: unlimited automatic and manual drives, rules (Home, Work, regular places), every PDF report for any period, Apple Watch app and complication, widgets, Live Activity, iCloud sync, Tracking Health.
+- Odarri Pro: $9.99 for the first year, then $14.99 a year, or $29.99 once (US prices). No monthly plan. Pro adds CSV of any period, more than one vehicle, client rules and custom purposes. Receipts and regional templates are planned for 1.1.
+- Tracking Health shows every setting that can cause a missed drive, each with a one-tap fix.
+- Reports: a reason per business drive, start/end addresses with coordinates, edits shown beside original values, PDFs certified on the phone; anyone can check a PDF at https://odarri.com/verify.
+- Built-in mileage rates: US (IRS), UK (HMRC), Canada (CRA), Australia (ATO), New Zealand (IRD); custom rate elsewhere.
+- Privacy: no account, no server, no analytics or third-party SDKs; App Store label "Data Not Collected". Data stays on the device and the user's private iCloud.
+- Imports CSV exports from MileIQ, Everlance, Driversnote, Stride and TripLog.
+- Odarri is a mileage log, not tax advice, and does not claim to be audit-proof.
+
+## Pages
+- [Home](https://odarri.com/)
+- [Support and FAQ](https://odarri.com/support)
+- [Privacy policy](https://odarri.com/privacy)
+- [Terms of use](https://odarri.com/terms)
+- [Check a report](https://odarri.com/verify)
+
+Contact: support@odarri.com

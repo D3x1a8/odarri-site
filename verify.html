@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Check an Odarri report</title>
+<meta name="description" content="Check that an Odarri mileage report PDF or CSV is unchanged since it was exported. Runs in your browser; nothing is uploaded.">
+<link rel="canonical" href="https://odarri.com/verify">
+<meta name="theme-color" content="#121110">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<style>
+  .card { background: var(--white); border: 1px solid var(--hair); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+  .card h2 { font-size: 20px; }
+  .drop { display: block; border: 2px dashed rgba(21,20,15,.18); border-radius: 18px; padding: 28px 20px; text-align: center; cursor: pointer; color: var(--ink-2); transition: border-color .2s ease, background .2s ease; }
+  .drop:hover, .drop.over { border-color: var(--line); background: #FBF6E4; }
+  .drop input { display: none; }
+  .result:empty { display: none; }
+  .verdict { font-weight: 700; font-size: 17px; }
+  .verdict.ok { color: var(--ok); } .verdict.bad { color: var(--telltale); }
+  .card dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 12px 0 0; font-size: 14px; }
+  .card dt { color: var(--ink-2); } .card dd { margin: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+  .card code { font-family: var(--mono); font-size: 13px; }
+  .card input[type=text] { width: 100%; font: 13px var(--mono); padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(21,20,15,.15); background: var(--paper); color: var(--ink); }
+  .small { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+  .doc p.small { font-size: 14px; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="mast">
+<div class="wrap">
+<a class="brand" href="/"><img src="/img/icon-64.png" alt="" width="36" height="36">Odarri</a>
+<nav aria-label="Main"><a href="/">Home</a><a href="/privacy">Privacy</a><a href="/support">Support</a></nav>
+</div>
+</header>
+
+<main id="main" class="doc">
+  <div class="stack" style="gap:14px">
+    <p class="eyebrow">Check a report</p>
+    <h1 class="w">Is this the report Odarri exported?</h1>
+    <p class="lead">Odarri certifies every PDF report on the phone that made it. Drop the PDF here to see whether it has changed since it was exported. The check runs in this page; nothing is uploaded.</p>
+  </div>
+
+  <section class="card">
+    <h2>PDF report</h2>
+    <label class="drop" id="pdfDrop">Drop the PDF here, or tap to choose it<input type="file" id="pdf" accept="application/pdf,.pdf"></label>
+    <div class="result" id="pdfResult" aria-live="polite"></div>
+  </section>
+
+  <section class="card">
+    <h2>CSV export</h2>
+    <p class="small">The PDF prints the SHA-256 of the CSV made from the same report. Paste that number, then drop the CSV.</p>
+    <input type="text" id="printed" placeholder="SHA-256 printed on the PDF" autocomplete="off" spellcheck="false" aria-label="SHA-256 printed on the PDF">
+    <label class="drop" id="csvDrop">Drop the CSV here, or tap to choose it<input type="file" id="csv" accept=".csv,text/csv"></label>
+    <div class="result" id="csvResult" aria-live="polite"></div>
+  </section>
+
+  <p class="small">What this shows: whether the file is the one Odarri exported, byte for byte. It does not show who made the report (the signing key belongs to one phone and no authority vouches for it), and it does not show that the drives are true. Odarri is not tax advice.</p>
+</main>
+
+<footer class="foot">
+<div class="wrap">
+<div><a class="brand" href="/"><img src="/img/icon-64.png" alt="" width="24" height="24">Odarri</a><p>© 2026 Pritesh Singh. Odarri is a mileage log, not tax advice.</p></div>
+<nav aria-label="Footer"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/support">Support</a><a href="/verify">Check a report</a><a href="mailto:support@odarri.com">support@odarri.com</a></nav>
+</div>
+</footer>
+<script>
+"use strict";
+// ---- DER (just what an Odarri signature needs) ----
+function parseDER(b, off = 0) {
+  const tag = b[off]; let len = b[off + 1], hdr = 2;
+  if (len & 0x80) { const n = len & 0x7f; len = 0; for (let i = 0; i < n; i++) len = len * 256 + b[off + 2 + i]; hdr = 2 + n; }
+  const start = off + hdr, end = start + len;
+  if (end > b.length) throw new Error("truncated DER");
+  return { tag, start, end, raw: b.subarray(off, end), content: b.subarray(start, end),
+           children() { const out = []; let o = start; while (o < end) { const c = parseDER(b, o); out.push(c); o = c.end; } return out; } };
+}
+const hex = (u8) => Array.from(u8, x => x.toString(16).padStart(2, "0")).join("");
+const eq = (a, b) => a.length === b.length && a.every((x, i) => x === b[i]);
+const OID_MESSAGE_DIGEST = [0x2a,0x86,0x48,0x86,0xf7,0x0d,0x01,0x09,0x04];
+const OID_SIGNING_TIME = [0x2a,0x86,0x48,0x86,0xf7,0x0d,0x01,0x09,0x05];
+const OID_CN = [0x55,0x04,0x03];
+
+// DER ECDSA (SEQUENCE { r, s }) → the 64-byte r‖s WebCrypto expects.
+function rawSignature(der) {
+  const [r, s] = parseDER(der).children();
+  const fix = (x) => { let v = Array.from(x.content); while (v.length > 32 && v[0] === 0) v.shift(); while (v.length < 32) v.unshift(0); return v; };
+  return new Uint8Array([...fix(r), ...fix(s)]);
+}
+
+function readTime(node) {
+  const s = new TextDecoder().decode(node.content);
+  const y = node.tag === 0x17 ? (parseInt(s.slice(0, 2)) < 50 ? 2000 : 1900) + parseInt(s.slice(0, 2)) : parseInt(s.slice(0, 4));
+  const r = node.tag === 0x17 ? s.slice(2) : s.slice(4);
+  return new Date(Date.UTC(y, +r.slice(0, 2) - 1, +r.slice(2, 4), +r.slice(4, 6), +r.slice(6, 8), +r.slice(8, 10)));
+}
+
+// ---- The check ----
+async function checkPDF(bytes) {
+  const subtle = globalThis.crypto.subtle;
+  const text = new TextDecoder("latin1").decode(bytes);
+  const at = text.lastIndexOf("/ByteRange [");
+  if (at < 0) return { ok: false, verdict: "This PDF carries no signature. Odarri reports from build 20 on are certified." };
+  const [a, b, c, e] = text.slice(at + 12, text.indexOf("]", at)).trim().split(/\s+/).map(Number);
+  const hexText = text.slice(b + 1, c - 1);
+  const blob = new Uint8Array(hexText.length / 2);
+  for (let i = 0; i < blob.length; i++) blob[i] = parseInt(hexText.substr(i * 2, 2), 16);
+  const cms = parseDER(blob);
+  const signedData = cms.children()[1].children()[0];
+  const sd = signedData.children();
+  const certSet = sd.find(n => n.tag === 0xa0);
+  const signer = sd[sd.length - 1].children()[0].children();
+  const cert = parseDER(certSet.content);
+  const tbs = cert.children()[0].children();
+  const spki = tbs[6].raw;
+  const subject = tbs[5];
+  let commonName = "";
+  for (const rdn of subject.children()) for (const atv of rdn.children()) {
+    const [oid, val] = atv.children(); if (eq(Array.from(oid.content), OID_CN)) commonName = new TextDecoder().decode(val.content);
+  }
+  const attrs = signer.find(n => n.tag === 0xa0);
+  let digest = null, signedAt = null;
+  for (const attr of attrs.children()) {
+    const [oid, set] = attr.children();
+    const v = set.children()[0];
+    if (eq(Array.from(oid.content), OID_MESSAGE_DIGEST)) digest = v.content;
+    if (eq(Array.from(oid.content), OID_SIGNING_TIME)) signedAt = readTime(v);
+  }
+  const sig = signer[signer.length - 1].content;
+
+  const covered = new Uint8Array(b + e);
+  covered.set(bytes.subarray(a, a + b), 0);
+  covered.set(bytes.subarray(c, c + e), b);
+  const actual = new Uint8Array(await subtle.digest("SHA-256", covered));
+  const contentIntact = digest !== null && eq(Array.from(actual), Array.from(digest));
+
+  const asSet = new Uint8Array(attrs.raw); asSet[0] = 0x31;
+  const key = await subtle.importKey("spki", spki, { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
+  const signatureValid = await subtle.verify({ name: "ECDSA", hash: "SHA-256" }, key, rawSignature(sig), asSet);
+
+  const wholeFile = c + e === bytes.length;
+  const certified = /\/TransformMethod\s*\/DocMDP\s*\/TransformParams\s*<<[^>]*\/P\s+1\b/.test(text);
+  const fp = hex(new Uint8Array(await subtle.digest("SHA-256", spki)).subarray(0, 16)).toUpperCase().match(/.{4}/g).join(" ");
+
+  let ok = false, verdict;
+  if (!signatureValid || !contentIntact) verdict = "Changed: the signature no longer matches this file.";
+  else if (!wholeFile) verdict = `Changed after export: ${bytes.length - (c + e)} bytes were added after the signature.`;
+  else { ok = true; verdict = "Unchanged since Odarri exported it."; }
+  return { ok, verdict, fingerprint: fp, commonName, signedAt, certified, wholeFile, signatureValid, contentIntact };
+}
+
+async function sha256Hex(bytes) { return hex(new Uint8Array(await globalThis.crypto.subtle.digest("SHA-256", bytes))); }
+
+// ---- Page ----
+if (typeof document !== "undefined") {
+  const el = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+  function wire(dropId, inputId, handle) {
+    const drop = el(dropId), input = el(inputId);
+    input.addEventListener("change", () => input.files[0] && handle(input.files[0]));
+    drop.addEventListener("dragover", ev => { ev.preventDefault(); drop.classList.add("over"); });
+    drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+    drop.addEventListener("drop", ev => { ev.preventDefault(); drop.classList.remove("over"); ev.dataTransfer.files[0] && handle(ev.dataTransfer.files[0]); });
+  }
+  wire("pdfDrop", "pdf", async (file) => {
+    const out = el("pdfResult");
+    try {
+      const r = await checkPDF(new Uint8Array(await file.arrayBuffer()));
+      out.innerHTML = `<div class="verdict ${r.ok ? "ok" : "bad"}">${esc(r.verdict)}</div>` + (r.fingerprint ? `<dl>
+        <dt>File</dt><dd>${esc(file.name)}</dd>
+        <dt>Signed</dt><dd>${r.signedAt ? esc(r.signedAt.toLocaleString()) : "–"}</dd>
+        <dt>Key</dt><dd>${esc(r.commonName)}<br><span class="small">Fingerprint <code>${esc(r.fingerprint)}</code>. It should match the one printed on the PDF's last page, and on other reports from the same phone.</span></dd>
+        <dt>Certification</dt><dd>${r.certified ? "No changes allowed after signing" : "Not certified"}</dd></dl>` : "");
+    } catch (err) {
+      out.innerHTML = `<div class="verdict bad">This PDF's signature could not be read.</div><p class="small">${esc(err.message)}</p>`;
+    }
+  });
+  let csvHash = null;
+  const compare = () => {
+    const out = el("csvResult");
+    if (!csvHash) return;
+    const printed = el("printed").value.trim().toLowerCase().replace(/\s+/g, "");
+    let line = `<dl><dt>SHA-256</dt><dd><code>${csvHash}</code></dd></dl>`;
+    if (printed) line = `<div class="verdict ${printed === csvHash ? "ok" : "bad"}">${printed === csvHash ? "Matches the PDF: this is the CSV of that report." : "Does not match the number on the PDF."}</div>` + line;
+    out.innerHTML = line;
+  };
+  wire("csvDrop", "csv", async (file) => { csvHash = await sha256Hex(new Uint8Array(await file.arrayBuffer())); compare(); });
+  el("printed").addEventListener("input", compare);
+}
+if (typeof module !== "undefined") module.exports = { checkPDF, sha256Hex };
+</script>
+</body>
+</html>
