@@ -1,6 +1,6 @@
 # Odarri
 
-> Odarri is an automatic mileage log for iPhone and Apple Watch, by independent developer Pritesh Singh. Status: in TestFlight beta; App Store release planned for 5 January 2027.
+> Odarri is an automatic mileage log for iPhone and Apple Watch, by independent developer Pritesh Singh. Status: on the App Store since 13 November 2026 (version 1.0): https://apps.apple.com/app/id6831901174
 
 ## Facts
 - Logs drives automatically in the background (location Always + Motion & Fitness); fully usable in manual mode without those permissions.
